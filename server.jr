@@ -1,0 +1,91 @@
+const express = require('express');
+const path = require('path');
+const mysql = require('mysql2'); 
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname));
+
+// --- 1. ПІДКЛЮЧЕННЯ ДО БАЗИ ДАНИХ ---
+const db = mysql.createPool({
+    host: '192.168.137.134', 
+    port: 3306,
+    user: 'admin',           
+    password: '123456',      
+    database: 'camp_db',
+    connectTimeout: 30000,
+    waitForConnections: true,
+    connectionLimit: 10,
+    socketPath: undefined
+});
+
+db.getConnection((err, connection) => {
+    if (err) {
+        console.error('❌ Помилка підключення до БД:', err.message);
+    } else {
+        console.log('✅ Успішно підключено до бази даних camp_db!');
+        connection.release();
+    }
+});
+
+// --- 2. МАРШРУТИ СИСТЕМИ ---
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Обробка заявки
+app.post('/api/applications', (req, res) => {
+    const { parent_name, parent_phone, child_name, request_type, shift_id } = req.body;
+
+    // Розбиваємо ПІБ батька на ім'я та прізвище
+    const parentParts = parent_name ? parent_name.trim().split(' ') : ['', ''];
+    const parentFirstName = parentParts[0] || '';
+    const parentLastName = parentParts[1] || '';
+
+    // Розбиваємо ім'я дитини на ім'я та вік
+    const childParts = child_name ? child_name.trim().split(' ') : ['', ''];
+    const childFirstName = childParts[0] || '';
+    const childAge = parseInt(childParts[1]) || 0;
+
+    // Крок 1: Створюємо батька в таблиці Parents
+    const sqlParent = `INSERT INTO Parents (first_name, last_name, phone, email) VALUES (?, ?, ?, ?)`;
+    db.query(sqlParent, [parentFirstName, parentLastName, parent_phone, ''], (err, parentResult) => {
+        if (err) {
+            console.error('❌ Помилка створення батька:', err);
+            return res.status(500).json({ success: false, error: 'Помилка збереження в базу' });
+        }
+
+        const parentId = parentResult.insertId;
+
+        // Крок 2: Створюємо дитину в таблиці Children
+        const sqlChild = `INSERT INTO Children (first_name, last_name, age, parent_id) VALUES (?, ?, ?, ?)`;
+        db.query(sqlChild, [childFirstName, '', childAge, parentId], (err, childResult) => {
+            if (err) {
+                console.error('❌ Помилка створення дитини:', err);
+                return res.status(500).json({ success: false, error: 'Помилка збереження в базу' });
+            }
+
+            const childId = childResult.insertId;
+            const safeShiftId = shift_id ? shift_id : null;
+
+            // Крок 3: Створюємо заявку в таблиці Applications
+            const sqlApp = `INSERT INTO Applications (parent_id, child_id, shift_id, total_amount) VALUES (?, ?, ?, ?)`;
+            db.query(sqlApp, [parentId, childId, safeShiftId, 0], (err, appResult) => {
+                if (err) {
+                    console.error('❌ Помилка створення заявки:', err);
+                    return res.status(500).json({ success: false, error: 'Помилка збереження в базу' });
+                }
+
+                console.log(`✅ Нова заявка від ${parent_name} успішно записана в БД! (ID: ${appResult.insertId})`);
+                res.json({ success: true, message: "Заявку успішно збережено в базі даних!" });
+            });
+        });
+    });
+});
+
+// --- 3. ЗАПУСК СЕРВЕРА ---
+app.listen(PORT, () => {
+    console.log(`🚀 Сервер табору запущено: http://localhost:${PORT}`);
+});
