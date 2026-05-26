@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Розклад змін - Земля Отаманів</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .catalog-header { background-color: #2E7D32; color: white; padding: 40px 0; text-align: center; }
+        .catalog-container { display: flex; gap: 30px; margin-top: 40px; }
+        .filters { width: 250px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); height: fit-content; }
+        .filter-group { margin-bottom: 20px; }
+        .filter-group select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit; }
+        .shifts-grid { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+        .shift-card { background: white; border-radius: 10px; display: flex; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .shift-img { width: 300px; background: url('https://images.unsplash.com/photo-1517164850305-99a3e65bb47e?auto=format&fit=crop&w=800&q=80') center/cover; }
+        .shift-info { padding: 20px; flex: 1; }
+        .shift-price { font-size: 24px; color: #E65100; font-weight: bold; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">🏕️ Земля Отаманів</div>
+            <nav>
+                <a href="index.html">Головна</a>
+                <a href="catalog.html" class="active">Розклад змін</a>
+                <a href="about.html">Про табір</a>
+                <a href="contacts.html">Контакти</a>
+            </nav>
+            <div class="auth-buttons">
+                <a href="cabinet.html" class="btn-login">Особистий кабінет</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="catalog-header">
+        <h1>Розклад табірних змін</h1>
+        <p>Оберіть найкращий час та місце для відпочинку вашої дитини</p>
+    </div>
+
+    <div class="container catalog-container">
+        <aside class="filters">
+            <h3>Фільтри</h3>
+            <hr style="margin: 10px 0; border: 0; border-top: 1px solid #eee;">
+            <div class="filter-group">
+                <label>Локація</label>
+                <select id="locationFilter">
+                    <option value="Всі локації">Всі локації</option>
+                    <option value="Карпати">Карпати (Лісовий)</option>
+                    <option value="Одеса">Одеса (Морський)</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Місяць</label>
+                <select>
+                    <option>Всі</option>
+                    <option>Червень 2026</option>
+                    <option>Липень 2026</option>
+                    <option>Серпень 2026</option>
+                </select>
+            </div>
+            <button class="btn-primary" style="width: 100%; padding: 10px; border: none; cursor: pointer;" onclick="applyFilters()">Застосувати</button>
+        </aside>
+
+        <main class="shifts-grid">
+            <div class="shift-card" data-location="Карпати">
+                <div class="shift-img"></div>
+                <div class="shift-info">
+                    <h2 style="color: #2E7D32; margin-bottom: 10px;">Табір "Лісовий" - Козацька варта</h2>
+                    <p style="margin-bottom: 5px;"><strong>Локація:</strong> Карпати</p>
+                    <p style="margin-bottom: 5px;"><strong>Дати:</strong> 01.06.2026 - 14.06.2026</p>
+                    <p style="margin-bottom: 5px;"><strong>Вільних місць:</strong> 50</p>
+                    <div class="shift-price">12 000 грн</div>
+                    <a href="shift.html" class="btn-primary" style="padding: 10px 20px; display: inline-block;">Детальніше та бронювання</a>
+                </div>
+            </div>
+
+            <div class="shift-card" data-location="Одеса">
+                <div class="shift-img" style="background-image: url('https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="shift-info">
+                    <h2 style="color: #2E7D32; margin-bottom: 10px;">Табір "Морський" - Чорноморська січ</h2>
+                    <p style="margin-bottom: 5px;"><strong>Локація:</strong> Одеса</p>
+                    <p style="margin-bottom: 5px;"><strong>Дати:</strong> 01.08.2026 - 14.08.2026</p>
+                    <p style="margin-bottom: 5px;"><strong>Вільних місць:</strong> 40</p>
+                    <div class="shift-price">16 000 грн</div>
+                    <a href="shift-sea.html" class="btn-primary" style="padding: 10px 20px; display: inline-block;">Детальніше та бронювання</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function applyFilters() {
+            const locationFilter = document.getElementById('locationFilter').value;
+            const cards = document.querySelectorAll('.shift-card');
+
+            cards.forEach(card => {
+                const cardLocation = card.getAttribute('data-location');
+                if (locationFilter === 'Всі локації' || locationFilter === cardLocation) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
