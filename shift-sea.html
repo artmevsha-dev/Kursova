@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чорноморська січ - Земля Отаманів</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .shift-header { background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?auto=format&fit=crop&w=1920&q=80') center/cover; height: 450px; display: flex; align-items: flex-end; padding-bottom: 50px; color: white; }
+        .shift-content { display: flex; gap: 40px; margin: 50px auto; align-items: flex-start; }
+        .shift-details { flex: 2; }
+        .info-block { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .info-block h2 { color: #2E7D32; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .includes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .include-item { display: flex; align-items: center; gap: 10px; font-weight: bold; color: #444; }
+        .include-icon { color: #E65100; font-size: 20px; }
+        .shift-form-card { flex: 1; background: #f0fdf4; padding: 30px; border-radius: 10px; border: 2px solid #2E7D32; position: sticky; top: 20px; }
+        .shift-form-card h3 { color: #2E7D32; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; font-size: 14px; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit; }
+        .price-tag { font-size: 32px; font-weight: 900; color: #E65100; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">🏕️ Земля Отаманів</div>
+            <nav>
+                <a href="index.html">Головна</a>
+                <a href="catalog.html">Розклад змін</a>
+                <a href="about.html">Про табір</a>
+                <a href="contacts.html">Контакти</a>
+            </nav>
+            <div class="auth-buttons">
+                <a href="cabinet.html" class="btn-login">Особистий кабінет</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="shift-header">
+        <div class="container">
+            <span style="background: #E65100; padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-bottom: 15px; display: inline-block;">📍 Одеса (Чорне море)</span>
+            <h1 style="font-size: 48px; margin-bottom: 10px;">Табір "Морський" - Чорноморська січ</h1>
+            <p style="font-size: 18px; opacity: 0.9;">Вікова категорія: від 10 до 16 років</p>
+        </div>
+    </div>
+
+    <div class="container shift-content">
+        <div class="shift-details">
+            <div class="info-block">
+                <h2>Про програму "Чорноморська січ"</h2>
+                <p style="line-height: 1.8; color: #444;">Ця зміна ідеально підходить для тих, хто любить море та водні види спорту. Разом із козацьким вихованням діти отримують навички плавання та управління байдарками.</p>
+            </div>
+            <div class="info-block">
+                <h2>Що входить у вартість (16 000 грн)</h2>
+                <div class="includes-grid">
+                    <div class="include-item"><span class="include-icon">🏨</span> Проживання у номерах з кондиціонером</div>
+                    <div class="include-item"><span class="include-icon">🍉</span> 5-разове харчування (шведська лінія)</div>
+                    <div class="include-item"><span class="include-icon">🏖️</span> Власний закритий пляж з шезлонгами</div>
+                    <div class="include-item"><span class="include-icon">🚣</span> Навчання на байдарках та сапах</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shift-form-card">
+            <h3>Бронювання путівки</h3>
+            <div class="price-tag">16 000 грн</div>
+            <p style="margin-bottom: 25px; color: #666; font-size: 14px;">Оплата здійснюється після підтвердження заявки.</p>
+            
+            <form id="applicationForm">
+                <div class="form-group">
+                    <label>Оберіть дати заїзду</label>
+                    <select id="req-shift">
+                        <option value="ID_202">01.08.2026 - 14.08.2026</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ПІБ одного з батьків</label>
+                    <input type="text" id="req-name" placeholder="Наприклад: Петренко Іван">
+                </div>
+                <div class="form-group">
+                    <label>Контактний телефон</label>
+                    <input type="tel" id="req-phone" placeholder="+38 (000) 000-00-00">
+                </div>
+                <div class="form-group">
+                    <label>Ім'я та вік дитини</label>
+                    <input type="text" id="req-child" placeholder="Наприклад: Софія, 12 років">
+                </div>
+                <button type="button" id="submitBtn" class="btn-primary" style="width: 100%; border: none; cursor: pointer; margin-top: 15px;" onclick="submitApplication()">ПОДАТИ ЗАЯВКУ</button>
+                <div id="form-alert" style="display: none; margin-top: 15px; padding: 10px; border-radius: 5px; font-weight: bold; text-align: center;"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        async function submitApplication() {
+            const parentName = document.getElementById('req-name').value;
+            const parentPhone = document.getElementById('req-phone').value;
+            const childName = document.getElementById('req-child').value;
+            const shiftId = document.getElementById('req-shift').value;
+            const alertEl = document.getElementById('form-alert');
+            const btn = document.getElementById('submitBtn');
+
+            if (!parentName || !parentPhone || !childName) {
+                alertEl.style.background = '#ffebee';
+                alertEl.style.color = '#c62828';
+                alertEl.textContent = "❌ Заповніть усі поля!";
+                alertEl.style.display = 'block';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Надсилаємо...';
+
+            try {
+                const res = await fetch('/api/applications', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        parent_name: parentName,
+                        parent_phone: parentPhone,
+                        child_name: childName,
+                        request_type: 'морська зміна',
+                        shift_id: shiftId
+                    })
+                });
+
+                const data = await res.json();
+
+                setTimeout(() => {
+                    alertEl.style.background = '#e8f5e9';
+                    alertEl.style.color = '#2e7d32';
+                    alertEl.textContent = "✅ " + data.message;
+                    alertEl.style.display = 'block';
+                    btn.style.display = 'none';
+                }, 800);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
