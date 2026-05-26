@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакти - Земля Отаманів</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .contacts-wrapper { display: flex; gap: 50px; margin: 60px auto; }
+        .contact-info { flex: 1; }
+        .contact-info h2 { color: #2E7D32; margin-bottom: 20px; }
+        .info-item { margin-bottom: 20px; font-size: 18px; }
+        .info-item strong { color: #E65100; display: block; margin-bottom: 5px; }
+        .contact-form-card { flex: 1; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 5px solid #2E7D32; }
+        .form-group { margin-bottom: 20px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">🏕️ Земля Отаманів</div>
+            <nav>
+                <a href="index.html">Головна</a>
+                <a href="catalog.html">Розклад змін</a>
+                <a href="about.html">Про табір</a>
+                <a href="contacts.html" class="active">Контакти</a>
+            </nav>
+            <div class="auth-buttons">
+                <a href="cabinet.html" class="btn-login">Особистий кабінет</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container contacts-wrapper">
+        <div class="contact-info">
+            <h2>Зв'яжіться з нами</h2>
+            <p style="color: #666; margin-bottom: 30px;">Маєте запитання щодо бронювання чи умов перебування? Зателефонуйте нам або залиште повідомлення.</p>
+            
+            <div class="info-item">
+                <strong>📍 Центральний офіс:</strong>
+                м. Львів, вул. Університетська, 1
+            </div>
+            <div class="info-item">
+                <strong>📞 Телефони для довідок:</strong>
+                +38 (067) 111-22-33<br>
+                +38 (050) 999-88-77
+            </div>
+            <div class="info-item">
+                <strong>✉️ Електронна пошта:</strong>
+                info@zemlya-otamaniv.ua
+            </div>
+        </div>
+
+        <div class="contact-form-card">
+            <h3 style="margin-bottom: 20px; color: #333;">Написати нам</h3>
+            <form>
+                <div class="form-group">
+                    <input type="text" placeholder="Ваше ім'я">
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Номер телефону">
+                </div>
+                <div class="form-group">
+                    <textarea rows="4" placeholder="Ваше повідомлення..."></textarea>
+                </div>
+                <button type="button" class="btn-primary" style="width: 100%; border: none; cursor: pointer;">ВІДПРАВИТИ</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
