@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Особистий кабінет - Земля Отаманів</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .cabinet-container { display: flex; gap: 30px; margin: 40px auto; min-height: 60vh; }
+        .sidebar { width: 250px; background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); height: fit-content; }
+        .sidebar a { display: block; padding: 12px; color: #333; text-decoration: none; font-weight: bold; border-radius: 5px; margin-bottom: 5px; }
+        .sidebar a:hover, .sidebar a.active { background: #f0fdf4; color: #2E7D32; }
+        .content-area { flex: 1; background: white; border-radius: 10px; padding: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .table th, .table td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+        .table th { background: #f8f9fa; color: #555; }
+        .status-badge { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; color: white; }
+        .bg-green { background: #2E7D32; }
+        .bg-orange { background: #E65100; }
+        /* Блок відстеження (Timeline) */
+        .timeline { display: flex; justify-content: space-between; margin-top: 40px; position: relative; }
+        .timeline::before { content: ''; position: absolute; top: 15px; left: 0; width: 100%; height: 4px; background: #eee; z-index: 1; }
+        .step { position: relative; z-index: 2; text-align: center; width: 25%; }
+        .step-circle { width: 34px; height: 34px; background: #eee; border-radius: 50%; margin: 0 auto 10px; line-height: 34px; font-weight: bold; color: #aaa; border: 3px solid white; }
+        .step.active .step-circle { background: #E65100; color: white; }
+        .step.done .step-circle { background: #2E7D32; color: white; }
+        .step p { font-size: 14px; font-weight: bold; color: #555; }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">🏕️ Земля Отаманів</div>
+            <nav>
+                <a href="index.html">Головна</a>
+                <a href="catalog.html">Розклад змін</a>
+            </nav>
+            <div class="auth-buttons">
+                <span style="color: white; margin-right: 15px; font-weight: bold;">👤 Іван Петренко</span>
+                <a href="index.html" class="btn-login" style="border-color: white; color: white;">Вийти</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container cabinet-container">
+        <aside class="sidebar">
+            <h3 style="margin-bottom: 20px; color: #2E7D32;">Мій профіль</h3>
+            <a href="cabinet.html" class="active">Мої путівки</a>
+            <a href="cabinet-docs.html">Документи</a>
+            <a href="#">Налаштування</a>
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+            <a href="admin.html" style="color: #aaa; font-size: 12px;">👉 Вхід для адміна</a>
+        </aside>
+
+        <main class="content-area">
+            <h2 style="color: #333; margin-bottom: 10px;">Мої заявки та путівки</h2>
+            <p style="color: #666; margin-bottom: 20px;">Тут ви можете керувати бронюваннями та відстежувати статус оформлення.</p>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Дитина</th>
+                        <th>Зміна</th>
+                        <th>Сума</th>
+                        <th>Статус оплати</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Олег Петренко</strong></td>
+                        <td>Козацька варта (Карпати)</td>
+                        <td>12 000 грн</td>
+                        <td><span class="status-badge bg-green">Оплачено</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Софія Петренко</strong></td>
+                        <td>Чорноморська січ (Одеса)</td>
+                        <td>16 000 грн</td>
+                        <td><span class="status-badge bg-orange">Очікується</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 50px; color: #2E7D32;">Статус підготовки (Олег Петренко)</h3>
+            <div class="timeline">
+                <div class="step done">
+                    <div class="step-circle">✓</div>
+                    <p>Заявка прийнята</p>
+                </div>
+                <div class="step done">
+                    <div class="step-circle">✓</div>
+                    <p>Оплата підтверджена</p>
+                </div>
+                <div class="step active">
+                    <div class="step-circle">3</div>
+                    <p>Очікуємо мед. довідку</p>
+                </div>
+                <div class="step">
+                    <div class="step-circle">4</div>
+                    <p>Готовий до відправки</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
