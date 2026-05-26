@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документи - Особистий кабінет</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .cabinet-container { display: flex; gap: 30px; margin: 40px auto; min-height: 60vh; }
+        .sidebar { width: 250px; background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); height: fit-content; }
+        .sidebar a { display: block; padding: 12px; color: #333; text-decoration: none; font-weight: bold; border-radius: 5px; margin-bottom: 5px; }
+        .sidebar a:hover, .sidebar a.active { background: #f0fdf4; color: #2E7D32; }
+        .content-area { flex: 1; background: white; border-radius: 10px; padding: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .doc-card { border: 1px solid #eee; padding: 20px; border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .doc-card h4 { color: #333; margin-bottom: 5px; }
+        .doc-status { font-size: 12px; font-weight: bold; color: #E65100; }
+        .btn-upload { background: #f8f9fa; border: 1px solid #ccc; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; color: #555; }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">🏕️ Земля Отаманів</div>
+            <nav>
+                <a href="index.html">Головна</a>
+                <a href="catalog.html">Розклад змін</a>
+            </nav>
+            <div class="auth-buttons">
+                <span style="color: white; margin-right: 15px; font-weight: bold;">👤 Іван Петренко</span>
+                <a href="index.html" class="btn-login" style="border-color: white; color: white;">Вийти</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container cabinet-container">
+        <aside class="sidebar">
+            <h3 style="margin-bottom: 20px; color: #2E7D32;">Мій профіль</h3>
+            <a href="cabinet.html">Мої путівки</a>
+            <a href="cabinet-docs.html" class="active">Документи</a>
+            <a href="#">Налаштування</a>
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+            <a href="admin.html" style="color: #aaa; font-size: 12px;">👉 Вхід для адміна</a>
+        </aside>
+
+        <main class="content-area">
+            <h2 style="color: #333; margin-bottom: 10px;">Медичні довідки та анкети</h2>
+            <p style="color: #666; margin-bottom: 30px;">Завантажте необхідні документи для підтвердження путівки. Оригінали потрібно буде передати вожатому під час відправлення.</p>
+
+            <div class="doc-card">
+                <div>
+                    <h4>Медична довідка (форма 079/о) - Олег Петренко</h4>
+                    <span class="doc-status">⏳ Очікує завантаження</span>
+                </div>
+                <button class="btn-upload">📎 Завантажити скан</button>
+            </div>
+
+            <div class="doc-card" style="border-left: 4px solid #2E7D32;">
+                <div>
+                    <h4>Свідоцтво про народження (Копія) - Олег Петренко</h4>
+                    <span style="font-size: 12px; font-weight: bold; color: #2E7D32;">✅ Завантажено та перевірено</span>
+                </div>
+                <button class="btn-upload" disabled style="opacity: 0.5;">Файл додано</button>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
