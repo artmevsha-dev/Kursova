@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель керування | Земля Отаманів</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --sidebar-color: #1e293b;
+            --accent-green: #22c55e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-main); display: flex; min-height: 100vh; }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-color);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .logo { font-size: 20px; font-weight: 700; color: var(--accent-green); margin-bottom: 50px; display: flex; align-items: center; gap: 10px; }
+        
+        .nav-menu { list-style: none; flex-grow: 1; }
+        .nav-item { margin-bottom: 10px; }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+        .nav-link:hover, .nav-link.active { background-color: #334155; color: var(--accent-green); }
+        .nav-link i { font-size: 18px; }
+
+        /* --- MAIN CONTENT --- */
+        .main-content { margin-left: 280px; flex-grow: 1; padding: 40px; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .user-profile { display: flex; align-items: center; gap: 15px; }
+        .user-info { text-align: right; }
+        .user-name { font-weight: 600; display: block; }
+        .user-role { font-size: 12px; color: var(--text-muted); }
+        .avatar { width: 45px; height: 45px; background: var(--accent-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; }
+
+        /* --- STATS CARDS --- */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-bottom: 40px; }
+        .stat-card { background: var(--card-bg); padding: 25px; border-radius: 15px; border: 1px solid var(--border-color); }
+        .stat-card .label { color: var(--text-muted); font-size: 14px; margin-bottom: 10px; display: block; }
+        .stat-card .value { font-size: 28px; font-weight: 700; }
+        .stat-card .trend { font-size: 12px; margin-top: 10px; display: block; color: var(--accent-green); }
+
+        /* --- TABLE STYLE --- */
+        .data-section { background: var(--card-bg); border-radius: 15px; border: 1px solid var(--border-color); overflow: hidden; }
+        .section-header { padding: 20px 25px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #0f172a; color: var(--text-muted); font-size: 13px; text-transform: uppercase; text-align: left; padding: 15px 25px; }
+        td { padding: 18px 25px; border-bottom: 1px solid var(--border-color); font-size: 14px; }
+        
+        .status-badge { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .status-new { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+        .status-process { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+
+        .btn-action { background: none; border: 1px solid var(--border-color); color: var(--text-muted); padding: 5px 10px; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        .btn-action:hover { border-color: var(--accent-green); color: var(--accent-green); }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-tent"></i> Земля Отаманів
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="#" class="nav-link active"><i class="fa-solid fa-chart-line"></i> Дашборд</a></li>
+            <li class="nav-item"><a href="#" class="nav-link"><i class="fa-solid fa-clipboard-list"></i> Заявки</a></li>
+            <li class="nav-item"><a href="#" class="nav-link"><i class="fa-solid fa-map-location-dot"></i> Зміни таборів</a></li>
+            <li class="nav-item"><a href="#" class="nav-link"><i class="fa-solid fa-users"></i> Батьки</a></li>
+            <li class="nav-item"><a href="#" class="nav-link"><i class="fa-solid fa-user-shield"></i> Персонал</a></li>
+        </ul>
+        <div class="nav-item">
+            <a href="index.html" class="nav-link" style="color: #ef4444;"><i class="fa-solid fa-right-from-bracket"></i> Вийти</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="header">
+            <h2>Огляд активності</h2>
+            <div class="user-profile">
+                <div class="user-info">
+                    <span class="user-name">Отаман Адмін</span>
+                    <span class="user-role">Головний адміністратор</span>
+                </div>
+                <div class="avatar">А</div>
+            </div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="label">Нові заявки</span>
+                <span class="value">12</span>
+                <span class="trend">+4 сьогодні</span>
+            </div>
+            <div class="stat-card">
+                <span class="label">Оплачено путівок</span>
+                <span class="value">48</span>
+                <span class="trend">+2 сьогодні</span>
+            </div>
+            <div class="stat-card">
+                <span class="label">Вільних місць</span>
+                <span class="value">24</span>
+                <span class="trend">у 2 змінах</span>
+            </div>
+            <div class="stat-card" style="border-color: var(--accent-green);">
+                <span class="label">Загальний дохід</span>
+                <span class="value">648 000 ₴</span>
+                <span class="trend">+15% за місяць</span>
+            </div>
+        </div>
+
+        <div class="data-section">
+            <div class="section-header">
+                <h3>Останні заявки</h3>
+                <button class="btn-action">Дивитись всі</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Клієнт (Батьки)</th>
+                        <th>Дитина</th>
+                        <th>Зміна</th>
+                        <th>Дата</th>
+                        <th>Статус</th>
+                        <th>Дія</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-table-body">
+                    <tr>
+                        <td>Петренко Іван</td>
+                        <td>Олег (12 р.)</td>
+                        <td>Гірська зміна</td>
+                        <td>24.05.2026</td>
+                        <td><span class="status-badge status-new">Нова</span></td>
+                        <td><button class="btn-action">Обробка</button></td>
+                    </tr>
+                    <tr>
+                        <td>Сидоренко Марія</td>
+                        <td>Анна (10 р.)</td>
+                        <td>Морська зміна</td>
+                        <td>23.05.2026</td>
+                        <td><span class="status-badge status-process">В обробці</span></td>
+                        <td><button class="btn-action">Обробка</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        // Тут ми можемо додати логіку підтягування реальних даних
+        console.log("Адмін-панель завантажена");
+    </script>
+</body>
+</html>
